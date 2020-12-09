@@ -48,3 +48,17 @@ func readFile() []string {
 func hex(dec uint8) string {
 	return fmt.Sprintf("%02x", dec)
 }
+
+func writeFile(filePath string, data string) error {
+	f, err := os.OpenFile(filePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+
+	_, err = f.WriteString(data + "\r\n")
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
